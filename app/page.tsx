@@ -84,8 +84,8 @@ function Navbar() {
         </div>
 
         <div style={{ display: "flex", gap: 16, alignItems: "center" }}>
-          <a href="#" style={{ color: "#78716C", fontSize: 15, fontWeight: 500, textDecoration: "none" }}>Log in</a>
-          <a href="#"
+          <a href="/login" style={{ color: "#78716C", fontSize: 15, fontWeight: 500, textDecoration: "none" }}>Log in</a>
+          <a href="/register"
             style={{ backgroundColor: "#F97316", color: "white", padding: "10px 20px", borderRadius: 999, fontSize: 15, fontWeight: 600, textDecoration: "none", transition: "background-color 0.2s, transform 0.15s" }}
             onMouseEnter={e => { e.currentTarget.style.backgroundColor = "#EA580C"; e.currentTarget.style.transform = "translateY(-1px)"; }}
             onMouseLeave={e => { e.currentTarget.style.backgroundColor = "#F97316"; e.currentTarget.style.transform = "translateY(0)"; }}>
@@ -123,13 +123,13 @@ function Hero() {
           </p>
 
           <div className="animate-fade-up-delay-2" style={{ display: "flex", gap: 12, marginBottom: 24, flexWrap: "wrap" }}>
-            <a href="#"
+            <a href="/register"
               style={{ backgroundColor: "#F97316", color: "white", padding: "14px 28px", borderRadius: 999, fontSize: 16, fontWeight: 700, textDecoration: "none", transition: "all 0.2s", display: "inline-flex", alignItems: "center", gap: 8 }}
               onMouseEnter={e => { e.currentTarget.style.backgroundColor = "#EA580C"; e.currentTarget.style.transform = "translateY(-2px)"; e.currentTarget.style.boxShadow = "0 8px 24px rgba(249,115,22,0.35)"; }}
               onMouseLeave={e => { e.currentTarget.style.backgroundColor = "#F97316"; e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}>
               Post a task — it&apos;s free →
             </a>
-            <a href="#"
+            <a href="/login"
               style={{ backgroundColor: "white", color: "#1C1917", padding: "14px 28px", borderRadius: 999, fontSize: 16, fontWeight: 600, textDecoration: "none", border: "2px solid #E7E5E4", transition: "all 0.2s" }}
               onMouseEnter={e => { e.currentTarget.style.borderColor = "#F97316"; e.currentTarget.style.color = "#F97316"; }}
               onMouseLeave={e => { e.currentTarget.style.borderColor = "#E7E5E4"; e.currentTarget.style.color = "#1C1917"; }}>

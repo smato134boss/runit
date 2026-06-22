@@ -45,15 +45,14 @@ export default function RegisterPage() {
     }
 
     if (data.user) {
-      // Save profile to profiles table
-      await supabase.from("profiles").insert({
+      await supabase.from("profiles").upsert({
         id: data.user.id,
         full_name: form.name,
         email: form.email,
         role,
         city: form.city,
         phone: form.phone,
-      });
+      }, { onConflict: "id" });
 
       router.push("/dashboard");
       router.refresh();

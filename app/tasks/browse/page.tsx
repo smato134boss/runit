@@ -18,7 +18,7 @@ type Task = {
   deadline: string | null;
   created_at: string;
   poster_id: string;
-  profiles: { full_name: string; rating: number; reviews_count: number } | null;
+  profiles?: { full_name: string; rating: number; reviews_count: number } | null;
 };
 
 function timeAgo(dateStr: string) {
@@ -61,7 +61,7 @@ export default function BrowsePage() {
 
     let query = supabase
       .from("tasks")
-      .select("*, profiles!left(full_name, rating, reviews_count)")
+      .select("*")
       .eq("status", "open")
       .neq("poster_id", uid || userId || "")
       .order("created_at", { ascending: false });

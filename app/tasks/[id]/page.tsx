@@ -28,7 +28,7 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
 
   const { data: task } = await supabase
     .from("tasks")
-    .select("*, profiles(full_name, city, rating, reviews_count)")
+    .select("*, poster:profiles!poster_id(full_name, city, rating, reviews_count)")
     .eq("id", id)
     .single();
 
@@ -100,18 +100,18 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
           </div>
 
           {/* Poster info */}
-          {task.profiles && (
+          {task.poster && (
             <div style={{ backgroundColor: "white", borderRadius: 16, padding: 20, border: "1px solid #E7E5E4" }}>
               <p style={{ fontSize: 12, fontWeight: 600, color: "#78716C", marginBottom: 12, textTransform: "uppercase", letterSpacing: "0.5px" }}>Posted by</p>
               <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                 <div style={{ width: 44, height: 44, borderRadius: "50%", backgroundColor: "#FED7AA", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 16, fontWeight: 700, color: "#EA580C", flexShrink: 0 }}>
-                  {task.profiles.full_name?.charAt(0).toUpperCase()}
+                  {task.poster.full_name?.charAt(0).toUpperCase()}
                 </div>
                 <div>
-                  <p style={{ fontSize: 15, fontWeight: 700, color: "#1C1917" }}>{task.profiles.full_name}</p>
+                  <p style={{ fontSize: 15, fontWeight: 700, color: "#1C1917" }}>{task.poster.full_name}</p>
                   <p style={{ fontSize: 13, color: "#78716C" }}>
-                    {task.profiles.city}
-                    {task.profiles.reviews_count > 0 && ` · ${task.profiles.rating.toFixed(1)}★ (${task.profiles.reviews_count} reviews)`}
+                    {task.poster.city}
+                    {task.poster.reviews_count > 0 && ` · ${task.poster.rating.toFixed(1)}★ (${task.poster.reviews_count} reviews)`}
                   </p>
                 </div>
               </div>

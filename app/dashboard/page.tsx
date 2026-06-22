@@ -1,6 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import ActionCard from "./ActionCard";
+import LogoutButton from "./LogoutButton";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -30,6 +31,7 @@ export default async function DashboardPage() {
           <div style={{ width: 36, height: 36, borderRadius: "50%", backgroundColor: "#FED7AA", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 700, color: "#EA580C" }}>
             {name.charAt(0).toUpperCase()}
           </div>
+          <LogoutButton />
         </div>
       </nav>
 

@@ -62,7 +62,7 @@ export default function BrowsePage() {
 
     let query = supabase
       .from("tasks")
-      .select("*, profiles(full_name, rating, reviews_count), bids!left(count)")
+      .select("*, profiles!left(full_name, rating, reviews_count), bids!left(count)")
       .eq("status", "open")
       .neq("poster_id", uid || userId || "")
       .order("created_at", { ascending: false });

@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import BidForm from "./BidForm";
 import AcceptBidButton from "./AcceptBidButton";
+import Chat from "./Chat";
 
 function timeAgo(dateStr: string) {
   const diff = Date.now() - new Date(dateStr).getTime();
@@ -43,6 +44,8 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
 
   const myBid = bids?.find(b => b.runner_id === user.id);
   const acceptedBid = bids?.find(b => b.status === "accepted");
+  const isAcceptedRunner = !isPoster && acceptedBid?.runner_id === user.id;
+  const showChat = task.status === "in_progress" && (isPoster || isAcceptedRunner);
 
   const st = STATUS_STYLE[task.status] || STATUS_STYLE.open;
   const deadline = task.deadline ? new Date(task.deadline) : null;
@@ -171,12 +174,17 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
           )}
         </div>
 
-        {/* Right: Bid form (runner) or summary (poster) */}
+        {/* Right: Chat (in_progress) / Bid form (runner, open) / Summary (poster, open) */}
         <div>
-          {!isPoster && task.status === "open" && (
+          {showChat && (
+            <Chat taskId={task.id} currentUserId={user.id} />
+          )}
+
+          {!showChat && !isPoster && task.status === "open" && (
             <BidForm taskId={task.id} budget={task.budget} existingBid={myBid || null} />
           )}
-          {isPoster && (
+
+          {!showChat && isPoster && (
             <div style={{ backgroundColor: "white", borderRadius: 16, padding: 24, border: "1px solid #E7E5E4", position: "sticky", top: 80 }}>
               <p style={{ fontSize: 13, fontWeight: 700, color: "#1C1917", marginBottom: 16, textTransform: "uppercase", letterSpacing: "0.5px" }}>Task summary</p>
               <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 8 }}>
@@ -200,7 +208,8 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
               </div>
             </div>
           )}
-          {!isPoster && task.status !== "open" && (
+
+          {!showChat && !isPoster && task.status !== "open" && (
             <div style={{ backgroundColor: "white", borderRadius: 16, padding: 24, border: "1px solid #E7E5E4", textAlign: "center" }}>
               <p style={{ fontSize: 15, fontWeight: 600, color: "#78716C" }}>This task is no longer accepting offers.</p>
             </div>

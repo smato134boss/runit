@@ -2,21 +2,43 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => setLoading(false), 1500);
+    setError("");
+
+    const supabase = createClient();
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+    } else {
+      router.push("/dashboard");
+      router.refresh();
+    }
+  };
+
+  const handleGoogle = async () => {
+    const supabase = createClient();
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${window.location.origin}/auth/callback` },
+    });
   };
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#FAFAF8", display: "flex", flexDirection: "column" }}>
-      {/* Navbar */}
       <nav style={{ backgroundColor: "white", borderBottom: "1px solid #E7E5E4", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Link href="/" style={{ textDecoration: "none" }}>
           <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>runit</span>
@@ -27,22 +49,19 @@ export default function LoginPage() {
         </span>
       </nav>
 
-      {/* Content */}
       <div style={{ flex: 1, display: "flex", alignItems: "center", justifyContent: "center", padding: "40px 24px" }}>
         <div style={{ width: "100%", maxWidth: 440 }}>
-          {/* Header */}
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <h1 style={{ fontSize: 32, fontWeight: 800, color: "#1C1917", letterSpacing: "-1px", marginBottom: 8 }}>Welcome back</h1>
             <p style={{ fontSize: 15, color: "#78716C" }}>Log in to your runit account</p>
           </div>
 
-          {/* Card */}
           <div style={{ backgroundColor: "white", borderRadius: 24, padding: 40, border: "1px solid #E7E5E4", boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>
-            {/* Google Button */}
             <button
+              onClick={handleGoogle}
               style={{ width: "100%", padding: "12px 20px", borderRadius: 12, border: "2px solid #E7E5E4", backgroundColor: "white", fontSize: 15, fontWeight: 600, color: "#1C1917", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center", gap: 10, marginBottom: 24, transition: "all 0.2s" }}
-              onMouseEnter={e => { e.currentTarget.style.borderColor = "#1C1917"; e.currentTarget.style.backgroundColor = "#FAFAF8"; }}
-              onMouseLeave={e => { e.currentTarget.style.borderColor = "#E7E5E4"; e.currentTarget.style.backgroundColor = "white"; }}>
+              onMouseEnter={e => e.currentTarget.style.borderColor = "#1C1917"}
+              onMouseLeave={e => e.currentTarget.style.borderColor = "#E7E5E4"}>
               <svg width="18" height="18" viewBox="0 0 18 18">
                 <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"/>
                 <path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z"/>
@@ -52,14 +71,18 @@ export default function LoginPage() {
               Continue with Google
             </button>
 
-            {/* Divider */}
             <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 24 }}>
               <div style={{ flex: 1, height: 1, backgroundColor: "#E7E5E4" }} />
               <span style={{ fontSize: 13, color: "#78716C", fontWeight: 500 }}>or</span>
               <div style={{ flex: 1, height: 1, backgroundColor: "#E7E5E4" }} />
             </div>
 
-            {/* Form */}
+            {error && (
+              <div style={{ backgroundColor: "#FEF2F2", border: "1px solid #FECACA", borderRadius: 10, padding: "12px 16px", marginBottom: 16, fontSize: 14, color: "#DC2626" }}>
+                {error}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} style={{ display: "flex", flexDirection: "column", gap: 16 }}>
               <div>
                 <label style={{ fontSize: 13, fontWeight: 600, color: "#1C1917", display: "block", marginBottom: 6 }}>Email</label>
@@ -97,7 +120,7 @@ export default function LoginPage() {
                 disabled={loading}
                 style={{ width: "100%", padding: "14px", borderRadius: 12, backgroundColor: loading ? "#FED7AA" : "#F97316", color: "white", fontSize: 16, fontWeight: 700, border: "none", cursor: loading ? "not-allowed" : "pointer", transition: "all 0.2s", marginTop: 4 }}
                 onMouseEnter={e => { if (!loading) e.currentTarget.style.backgroundColor = "#EA580C"; }}
-                onMouseLeave={e => { if (!loading) e.currentTarget.style.backgroundColor = "#F97316"; }}>
+                onMouseLeave={e => { if (!loading) e.currentTarget.style.backgroundColor = loading ? "#FED7AA" : "#F97316"; }}>
                 {loading ? "Logging in..." : "Log in →"}
               </button>
             </form>
@@ -105,8 +128,7 @@ export default function LoginPage() {
 
           <p style={{ textAlign: "center", fontSize: 13, color: "#78716C", marginTop: 24 }}>
             By continuing, you agree to our{" "}
-            <Link href="/terms" style={{ color: "#F97316", textDecoration: "none" }}>Terms</Link>
-            {" "}and{" "}
+            <Link href="/terms" style={{ color: "#F97316", textDecoration: "none" }}>Terms</Link>{" "}and{" "}
             <Link href="/privacy" style={{ color: "#F97316", textDecoration: "none" }}>Privacy Policy</Link>
           </p>
         </div>

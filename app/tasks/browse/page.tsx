@@ -19,7 +19,6 @@ type Task = {
   created_at: string;
   poster_id: string;
   profiles: { full_name: string; rating: number; reviews_count: number } | null;
-  bids: { count: number }[];
 };
 
 function timeAgo(dateStr: string) {
@@ -62,7 +61,7 @@ export default function BrowsePage() {
 
     let query = supabase
       .from("tasks")
-      .select("*, profiles!left(full_name, rating, reviews_count), bids!left(count)")
+      .select("*, profiles!left(full_name, rating, reviews_count)")
       .eq("status", "open")
       .neq("poster_id", uid || userId || "")
       .order("created_at", { ascending: false });
@@ -138,7 +137,6 @@ export default function BrowsePage() {
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {tasks.map(task => {
               const alreadyBid = myBids.has(task.id);
-              const bidCount = task.bids?.[0]?.count ?? 0;
               const deadline = task.deadline ? new Date(task.deadline) : null;
 
               return (
@@ -151,7 +149,6 @@ export default function BrowsePage() {
                         <span style={{ fontSize: 12, color: "#78716C", backgroundColor: "#F5F4F2", padding: "3px 10px", borderRadius: 999 }}>{task.category}</span>
                         <span style={{ fontSize: 12, color: "#A8A29E" }}>{timeAgo(task.created_at)}</span>
                         {alreadyBid && <span style={{ fontSize: 12, color: "#16A34A", backgroundColor: "#F0FDF4", padding: "3px 10px", borderRadius: 999, fontWeight: 600 }}>✓ Offer sent</span>}
-                        {bidCount > 0 && !alreadyBid && <span style={{ fontSize: 12, color: "#F97316", backgroundColor: "#FFF7ED", padding: "3px 10px", borderRadius: 999 }}>{bidCount} offer{bidCount > 1 ? "s" : ""}</span>}
                       </div>
 
                       <h3 style={{ fontSize: 17, fontWeight: 700, color: "#1C1917", marginBottom: 8 }}>{task.title}</h3>

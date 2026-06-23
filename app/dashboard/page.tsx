@@ -28,9 +28,11 @@ export default async function DashboardPage() {
         </a>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <span style={{ fontSize: 14, color: "#78716C" }}>{city}</span>
-          <div style={{ width: 36, height: 36, borderRadius: "50%", backgroundColor: "#FED7AA", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 700, color: "#EA580C" }}>
-            {name.charAt(0).toUpperCase()}
-          </div>
+          <a href={`/profile/${user.id}`} style={{ textDecoration: "none" }}>
+            <div style={{ width: 36, height: 36, borderRadius: "50%", backgroundColor: "#FED7AA", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 14, fontWeight: 700, color: "#EA580C", cursor: "pointer" }}>
+              {name.charAt(0).toUpperCase()}
+            </div>
+          </a>
           <LogoutButton />
         </div>
       </nav>

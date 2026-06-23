@@ -22,15 +22,22 @@ export default async function JobsPage() {
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
-  // Get all bids where this runner was accepted
+  // Get accepted bids for this runner
   const { data: bids } = await supabase
     .from("bids")
-    .select("*, task:tasks!task_id(id, title, category, from_city, to_city, budget, deadline, status, created_at)")
+    .select("id, task_id, amount, status, created_at")
     .eq("runner_id", user.id)
     .eq("status", "accepted")
     .order("created_at", { ascending: false });
 
-  const jobs = bids?.filter(b => b.task) ?? [];
+  // Fetch task details separately to avoid RLS join issues
+  const taskIds = (bids ?? []).map(b => b.task_id);
+  const { data: tasks } = taskIds.length
+    ? await supabase.from("tasks").select("id, title, category, from_city, to_city, budget, deadline, status, created_at").in("id", taskIds)
+    : { data: [] };
+
+  const taskMap = Object.fromEntries((tasks ?? []).map(t => [t.id, t]));
+  const jobs = (bids ?? []).map(b => ({ ...b, task: taskMap[b.task_id] ?? null })).filter(b => b.task);
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#FAFAF8" }}>
@@ -74,17 +81,8 @@ export default async function JobsPage() {
                     borderRadius: 16,
                     padding: 24,
                     border: "2px solid #E7E5E4",
-                    transition: "all 0.2s",
                     cursor: "pointer",
-                  }}
-                    onMouseEnter={(e: React.MouseEvent<HTMLDivElement>) => {
-                      e.currentTarget.style.borderColor = "#F97316";
-                      e.currentTarget.style.boxShadow = "0 4px 20px rgba(249,115,22,0.1)";
-                    }}
-                    onMouseLeave={(e: React.MouseEvent<HTMLDivElement>) => {
-                      e.currentTarget.style.borderColor = "#E7E5E4";
-                      e.currentTarget.style.boxShadow = "none";
-                    }}>
+                  }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
                       <div style={{ flex: 1 }}>
                         <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 8 }}>

@@ -2,6 +2,7 @@ import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 import BidForm from "./BidForm";
 import AcceptBidButton from "./AcceptBidButton";
+import MarkAsDoneButton from "./MarkAsDoneButton";
 import Chat from "./Chat";
 
 function timeAgo(dateStr: string) {
@@ -20,8 +21,9 @@ const STATUS_STYLE: Record<string, { bg: string; color: string; label: string }>
   cancelled:   { bg: "#FEF2F2", color: "#DC2626", label: "Cancelled" },
 };
 
-export default async function TaskDetailPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function TaskDetailPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams: Promise<{ payment?: string }> }) {
   const { id } = await params;
+  const { payment } = await searchParams;
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
@@ -52,6 +54,16 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#FAFAF8" }}>
+      {payment === "success" && (
+        <div style={{ backgroundColor: "#16A34A", color: "white", textAlign: "center", padding: "12px 24px", fontSize: 14, fontWeight: 600 }}>
+          ✓ Payment successful — chat is now open. Runner will be notified.
+        </div>
+      )}
+      {payment === "cancelled" && (
+        <div style={{ backgroundColor: "#DC2626", color: "white", textAlign: "center", padding: "12px 24px", fontSize: 14, fontWeight: 600 }}>
+          Payment cancelled — the offer was not accepted.
+        </div>
+      )}
       <nav style={{ backgroundColor: "white", borderBottom: "1px solid #E7E5E4", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <a href="/" style={{ textDecoration: "none" }}>
           <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>runit</span>
@@ -134,12 +146,16 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
                   }}>
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: 8 }}>
                       <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                        <div style={{ width: 36, height: 36, borderRadius: "50%", backgroundColor: "#BFDBFE", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, color: "#1D4ED8" }}>
-                          {bid.profiles?.full_name?.charAt(0).toUpperCase()}
-                        </div>
+                        <a href={`/profile/${bid.runner_id}`} style={{ textDecoration: "none", flexShrink: 0 }}>
+                          <div style={{ width: 36, height: 36, borderRadius: "50%", backgroundColor: "#BFDBFE", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 13, fontWeight: 700, color: "#1D4ED8" }}>
+                            {bid.profiles?.full_name?.charAt(0).toUpperCase()}
+                          </div>
+                        </a>
                         <div>
-                          <p style={{ fontSize: 14, fontWeight: 700, color: "#1C1917" }}>{bid.profiles?.full_name}</p>
-                          <p style={{ fontSize: 12, color: "#78716C" }}>
+                          <a href={`/profile/${bid.runner_id}`} style={{ textDecoration: "none" }}>
+                            <p style={{ fontSize: 14, fontWeight: 700, color: "#1C1917", margin: 0 }}>{bid.profiles?.full_name}</p>
+                          </a>
+                          <p style={{ fontSize: 12, color: "#78716C", margin: 0 }}>
                             {bid.profiles?.city}
                             {bid.profiles?.reviews_count > 0 && ` · ${bid.profiles.rating.toFixed(1)}★`}
                           </p>
@@ -154,7 +170,7 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
                       <p style={{ fontSize: 13, color: "#44403C", lineHeight: 1.5, margin: "8px 0" }}>{bid.message}</p>
                     )}
                     {task.status === "open" && bid.status === "pending" && (
-                      <AcceptBidButton bidId={bid.id} taskId={task.id} runnerId={bid.runner_id} />
+                      <AcceptBidButton bidId={bid.id} taskId={task.id} runnerId={bid.runner_id} amount={bid.amount} />
                     )}
                     {bid.status === "accepted" && (
                       <span style={{ fontSize: 12, color: "#16A34A", fontWeight: 700 }}>✓ Accepted</span>
@@ -203,9 +219,12 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
               )}
               <div style={{ borderTop: "1px solid #F5F4F2", paddingTop: 16, marginTop: 16 }}>
                 <p style={{ fontSize: 12, color: "#A8A29E", lineHeight: 1.5 }}>
-                  runit charges 10–15% platform fee on the completed task amount.
+                  runit charges 15% platform fee on the completed task amount.
                 </p>
               </div>
+              {task.status === "in_progress" && (
+                <MarkAsDoneButton taskId={task.id} />
+              )}
             </div>
           )}
 

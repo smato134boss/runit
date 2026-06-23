@@ -1,28 +1,20 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
-import { useRouter } from "next/navigation";
 
-export default function AcceptBidButton({ bidId, taskId, runnerId }: { bidId: string; taskId: string; runnerId: string }) {
-  const router = useRouter();
+export default function AcceptBidButton({ bidId, taskId, runnerId, amount }: { bidId: string; taskId: string; runnerId: string; amount: number }) {
   const [loading, setLoading] = useState(false);
 
   const handleAccept = async () => {
     setLoading(true);
-    const supabase = createClient();
-
-    // Accept this bid
-    await supabase.from("bids").update({ status: "accepted" }).eq("id", bidId);
-
-    // Reject all other bids for this task
-    await supabase.from("bids").update({ status: "rejected" }).eq("task_id", taskId).neq("id", bidId);
-
-    // Move task to in_progress
-    await supabase.from("tasks").update({ status: "in_progress", runner_id: runnerId }).eq("id", taskId);
-
-    router.refresh();
-    setLoading(false);
+    const res = await fetch("/api/checkout", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ bidId, taskId }),
+    });
+    const { url, error } = await res.json();
+    if (error) { alert(error); setLoading(false); return; }
+    window.location.href = url;
   };
 
   return (
@@ -39,7 +31,7 @@ export default function AcceptBidButton({ bidId, taskId, runnerId }: { bidId: st
         cursor: loading ? "not-allowed" : "pointer",
         transition: "all 0.15s",
       }}>
-      {loading ? "Accepting..." : "✓ Accept this offer"}
+      {loading ? "Redirecting to payment..." : `✓ Accept & Pay C$${amount.toFixed(0)}`}
     </button>
   );
 }

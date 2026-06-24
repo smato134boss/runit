@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM = "runit <notifications@runit.ca>";
+const FROM = "runit <onboarding@resend.dev>";
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://runit-lake.vercel.app";
 
 export async function sendNewBidEmail({

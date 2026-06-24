@@ -10,14 +10,24 @@ export default function TermsPage() {
 
       <div style={{ maxWidth: 760, margin: "0 auto", padding: "56px 24px" }}>
         <h1 style={{ fontSize: 36, fontWeight: 800, color: "#1C1917", letterSpacing: "-1px", marginBottom: 8 }}>Terms of Service</h1>
-        <p style={{ fontSize: 14, color: "#A8A29E", marginBottom: 48 }}>Last updated: June 2026</p>
+        <p style={{ fontSize: 14, color: "#A8A29E", marginBottom: 32 }}>Last updated: June 2026</p>
+
+        {/* Marketplace disclaimer — prominent */}
+        <div style={{ backgroundColor: "#1C1917", color: "white", borderRadius: 16, padding: "24px 28px", marginBottom: 48 }}>
+          <p style={{ fontSize: 13, fontWeight: 700, textTransform: "uppercase", letterSpacing: "1px", color: "#F97316", marginBottom: 10 }}>
+            Important — Platform Notice
+          </p>
+          <p style={{ fontSize: 15, lineHeight: 1.8, margin: 0 }}>
+            <strong>runit is a technology platform and marketplace intermediary only.</strong> runit does not provide, perform, or guarantee any tasks or services listed on the platform. All tasks are performed by independent users ("Runners") who are not employees, agents, or contractors of runit. Any agreement for services is made solely between the Poster and the Runner. runit bears no responsibility for the quality, safety, legality, or completion of any task. By using this platform, you acknowledge that runit acts solely as a neutral intermediary and payment facilitator.
+          </p>
+        </div>
 
         <Section title="1. Acceptance of Terms">
           By creating an account on runit, you agree to be bound by these Terms of Service. If you do not agree, do not use the platform. runit is operated in Canada and these terms are governed by the laws of Ontario.
         </Section>
 
-        <Section title="2. The Platform">
-          runit is a peer-to-peer marketplace that connects people who need tasks done ("Posters") with people willing to do them ("Runners"). runit is not a party to any agreement between Posters and Runners and does not employ Runners. Runners are independent contractors.
+        <Section title="2. The Platform — Intermediary Role">
+          runit is a peer-to-peer marketplace that connects people who need tasks done ("Posters") with people willing to do them ("Runners"). <strong>runit is not a party to any service agreement between Posters and Runners, does not employ Runners, and does not control how tasks are performed.</strong> Runners are independent individuals acting on their own behalf. runit's role is limited to providing the technology platform and facilitating secure payments between users.
         </Section>
 
         <Section title="3. Eligibility">

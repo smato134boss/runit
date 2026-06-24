@@ -16,6 +16,7 @@ export default function RegisterPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [emailSent, setEmailSent] = useState(false);
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const updateForm = (field: string, value: string) => setForm(prev => ({ ...prev, [field]: value }));
 
@@ -266,6 +267,23 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
+                {/* Marketplace disclaimer checkbox */}
+                <div style={{ backgroundColor: "#F5F4F2", borderRadius: 12, padding: "14px 16px", display: "flex", alignItems: "flex-start", gap: 12 }}>
+                  <input
+                    type="checkbox"
+                    id="terms-agree"
+                    checked={agreedToTerms}
+                    onChange={e => setAgreedToTerms(e.target.checked)}
+                    style={{ marginTop: 2, accentColor: "#F97316", width: 16, height: 16, flexShrink: 0, cursor: "pointer" }}
+                  />
+                  <label htmlFor="terms-agree" style={{ fontSize: 13, color: "#44403C", lineHeight: 1.6, cursor: "pointer" }}>
+                    I understand that <strong>runit is a marketplace intermediary only</strong> and does not provide or guarantee any services. All tasks are performed by independent users. I agree to the{" "}
+                    <Link href="/terms" target="_blank" style={{ color: "#F97316", textDecoration: "none", fontWeight: 600 }}>Terms of Service</Link>
+                    {" "}and{" "}
+                    <Link href="/privacy" target="_blank" style={{ color: "#F97316", textDecoration: "none", fontWeight: 600 }}>Privacy Policy</Link>.
+                  </label>
+                </div>
+
                 <div style={{ display: "flex", gap: 10, marginTop: 4 }}>
                   <button type="button" onClick={() => setStep(1)}
                     style={{ flex: 1, padding: "14px", borderRadius: 12, backgroundColor: "white", color: "#1C1917", fontSize: 15, fontWeight: 600, border: "2px solid #E7E5E4", cursor: "pointer", transition: "all 0.2s" }}
@@ -273,10 +291,10 @@ export default function RegisterPage() {
                     onMouseLeave={e => e.currentTarget.style.borderColor = "#E7E5E4"}>
                     ← Back
                   </button>
-                  <button type="submit" disabled={loading}
-                    style={{ flex: 2, padding: "14px", borderRadius: 12, backgroundColor: loading ? "#FED7AA" : "#F97316", color: "white", fontSize: 16, fontWeight: 700, border: "none", cursor: loading ? "not-allowed" : "pointer", transition: "all 0.2s" }}
-                    onMouseEnter={e => { if (!loading) e.currentTarget.style.backgroundColor = "#EA580C"; }}
-                    onMouseLeave={e => { if (!loading) e.currentTarget.style.backgroundColor = "#F97316"; }}>
+                  <button type="submit" disabled={loading || !agreedToTerms}
+                    style={{ flex: 2, padding: "14px", borderRadius: 12, backgroundColor: loading || !agreedToTerms ? "#FED7AA" : "#F97316", color: "white", fontSize: 16, fontWeight: 700, border: "none", cursor: loading || !agreedToTerms ? "not-allowed" : "pointer", transition: "all 0.2s" }}
+                    onMouseEnter={e => { if (!loading && agreedToTerms) e.currentTarget.style.backgroundColor = "#EA580C"; }}
+                    onMouseLeave={e => { if (!loading && agreedToTerms) e.currentTarget.style.backgroundColor = "#F97316"; }}>
                     {loading ? "Creating account..." : "Create account 🎉"}
                   </button>
                 </div>
@@ -284,10 +302,8 @@ export default function RegisterPage() {
             )}
           </div>
 
-          <p style={{ textAlign: "center", fontSize: 13, color: "#78716C", marginTop: 20 }}>
-            By signing up, you agree to our{" "}
-            <Link href="/terms" style={{ color: "#F97316", textDecoration: "none" }}>Terms</Link>{" "}and{" "}
-            <Link href="/privacy" style={{ color: "#F97316", textDecoration: "none" }}>Privacy Policy</Link>
+          <p style={{ textAlign: "center", fontSize: 13, color: "#A8A29E", marginTop: 20 }}>
+            runit is a marketplace intermediary. Services are provided by independent users.
           </p>
         </div>
       </div>

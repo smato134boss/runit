@@ -15,6 +15,7 @@ export default function RegisterPage() {
   const [form, setForm] = useState({ name: "", email: "", password: "", city: "", phone: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [emailSent, setEmailSent] = useState(false);
 
   const updateForm = (field: string, value: string) => setForm(prev => ({ ...prev, [field]: value }));
 
@@ -25,10 +26,18 @@ export default function RegisterPage() {
 
     const supabase = createClient();
 
+    // Validate phone format if provided
+    if (form.phone && !/^\+?1?\s?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/.test(form.phone.trim())) {
+      setError("Please enter a valid Canadian phone number, e.g. +1 (416) 000-0000");
+      setLoading(false);
+      return;
+    }
+
     const { data, error: signUpError } = await supabase.auth.signUp({
       email: form.email,
       password: form.password,
       options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
         data: {
           full_name: form.name,
           role,
@@ -45,14 +54,28 @@ export default function RegisterPage() {
     }
 
     if (data.user) {
-      await supabase.from("profiles").upsert({
+      const normalizedPhone = form.phone.trim() || null;
+      const { error: profileError } = await supabase.from("profiles").upsert({
         id: data.user.id,
         full_name: form.name,
         email: form.email,
         role,
         city: form.city,
-        phone: form.phone,
+        phone: normalizedPhone,
       }, { onConflict: "id" });
+
+      if (profileError?.code === "23505") {
+        setError("This phone number is already registered. Please use a different number.");
+        setLoading(false);
+        return;
+      }
+
+      // If email confirmation is enabled, show verify screen
+      if (!data.session) {
+        setEmailSent(true);
+        setLoading(false);
+        return;
+      }
 
       router.push("/dashboard");
       router.refresh();
@@ -81,6 +104,32 @@ export default function RegisterPage() {
   };
 
   const canProceed = form.name && form.email && role;
+
+  if (emailSent) {
+    return (
+      <div style={{ minHeight: "100vh", backgroundColor: "#FAFAF8", display: "flex", alignItems: "center", justifyContent: "center", padding: 24 }}>
+        <div style={{ maxWidth: 480, width: "100%", textAlign: "center" }}>
+          <div style={{ fontSize: 64, marginBottom: 24 }}>📬</div>
+          <h1 style={{ fontSize: 28, fontWeight: 800, color: "#1C1917", letterSpacing: "-1px", marginBottom: 12 }}>
+            Check your email
+          </h1>
+          <p style={{ fontSize: 16, color: "#78716C", lineHeight: 1.6, marginBottom: 8 }}>
+            We sent a confirmation link to
+          </p>
+          <p style={{ fontSize: 16, fontWeight: 700, color: "#F97316", marginBottom: 24 }}>{form.email}</p>
+          <p style={{ fontSize: 14, color: "#78716C", lineHeight: 1.6, marginBottom: 32 }}>
+            Click the link in the email to activate your account. Check your spam folder if you don&apos;t see it.
+          </p>
+          <Link href="/login" style={{
+            display: "inline-block", backgroundColor: "#F97316", color: "white",
+            padding: "14px 32px", borderRadius: 999, fontSize: 15, fontWeight: 700, textDecoration: "none",
+          }}>
+            Go to login →
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: "100vh", backgroundColor: "#FAFAF8", display: "flex", flexDirection: "column" }}>

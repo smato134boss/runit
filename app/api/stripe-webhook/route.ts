@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import { createClient as createServerClient } from "@supabase/supabase-js";
+import { sendBidAcceptedEmail } from "@/lib/email";
 
 // Admin client bypasses RLS
 function adminClient() {
@@ -47,6 +48,28 @@ export async function POST(req: NextRequest) {
     // Update payment status
     await supabase.from("payments").update({ status: "paid" })
       .eq("stripe_session_id", session.id);
+
+    // Email runner: offer accepted
+    const { data: runner } = await supabase
+      .from("profiles").select("full_name, email").eq("id", runnerId).single();
+    const { data: task } = await supabase
+      .from("tasks").select("title, poster_id").eq("id", taskId).single();
+    const { data: poster } = task
+      ? await supabase.from("profiles").select("full_name").eq("id", task.poster_id).single()
+      : { data: null };
+    const { data: bid } = await supabase
+      .from("bids").select("amount").eq("id", bidId).single();
+
+    if (runner?.email && task && bid) {
+      await sendBidAcceptedEmail({
+        runnerEmail: runner.email,
+        runnerName: runner.full_name || "there",
+        posterName: poster?.full_name || "The poster",
+        taskTitle: task.title,
+        taskId,
+        amount: bid.amount,
+      }).catch(() => {});
+    }
   }
 
   return NextResponse.json({ received: true });

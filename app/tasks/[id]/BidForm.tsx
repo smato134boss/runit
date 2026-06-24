@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
 type Bid = { id: string; amount: number; message: string | null; status: string };
@@ -19,26 +18,17 @@ export default function BidForm({ taskId, budget, existingBid }: { taskId: strin
     setLoading(true);
     setError("");
 
-    const supabase = createClient();
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { router.push("/login"); return; }
+    const res = await fetch("/api/bids", {
+      method: existingBid ? "PATCH" : "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(existingBid
+        ? { bidId: existingBid.id, amount: parseFloat(amount), message }
+        : { taskId, amount: parseFloat(amount), message }
+      ),
+    });
 
-    if (existingBid) {
-      const { error: err } = await supabase
-        .from("bids")
-        .update({ amount: parseFloat(amount), message: message || null })
-        .eq("id", existingBid.id);
-      if (err) { setError(err.message); setLoading(false); return; }
-    } else {
-      const { error: err } = await supabase.from("bids").insert({
-        task_id: taskId,
-        runner_id: user.id,
-        amount: parseFloat(amount),
-        message: message || null,
-        status: "pending",
-      });
-      if (err) { setError(err.message); setLoading(false); return; }
-    }
+    const data = await res.json();
+    if (!res.ok) { setError(data.error || "Something went wrong"); setLoading(false); return; }
 
     setSuccess(true);
     setLoading(false);

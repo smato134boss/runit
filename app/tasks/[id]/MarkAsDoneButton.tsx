@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { createClient } from "@/lib/supabase/client";
 import { useRouter } from "next/navigation";
 
 export default function MarkAsDoneButton({ taskId }: { taskId: string }) {
@@ -30,9 +29,11 @@ export default function MarkAsDoneButton({ taskId }: { taskId: string }) {
       <div style={{ display: "flex", gap: 8 }}>
         <button disabled={loading} onClick={async () => {
           setLoading(true);
-          const supabase = createClient();
-          await supabase.from("tasks").update({ status: "completed" }).eq("id", taskId);
-          await supabase.from("payments").update({ status: "released" }).eq("task_id", taskId);
+          await fetch("/api/tasks/done", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ taskId }),
+          });
           router.refresh();
         }}
           style={{

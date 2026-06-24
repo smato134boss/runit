@@ -49,7 +49,8 @@ export async function POST(req: NextRequest) {
   }
 
   // Send email to poster
-  const poster = task.poster as { full_name: string; email: string } | null;
+  const posterRaw = task.poster as { full_name: string; email: string } | { full_name: string; email: string }[] | null;
+  const poster = Array.isArray(posterRaw) ? posterRaw[0] : posterRaw;
   if (poster?.email) {
     await sendNewBidEmail({
       posterEmail: poster.email,

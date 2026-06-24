@@ -150,11 +150,12 @@ export default async function EarningsPage() {
               const payStatus = payment?.status ?? "pending";
               const taskStatus = task.status;
 
-              const statusConfig = {
+              const statusMap: Record<string, { label: string; bg: string; color: string }> = {
                 released:  { label: "Paid out",   bg: "#F0FDF4", color: "#16A34A" },
                 paid:      { label: "In escrow",  bg: "#EFF6FF", color: "#2563EB" },
                 pending:   { label: "Pending",    bg: "#FFF7ED", color: "#EA580C" },
-              }[payStatus] ?? { label: payStatus, bg: "#F5F4F2", color: "#78716C" };
+              };
+              const statusConfig = statusMap[payStatus] ?? { label: payStatus, bg: "#F5F4F2", color: "#78716C" };
 
               return (
                 <a key={bid.id} href={`/tasks/${bid.task_id}`} style={{ textDecoration: "none" }}>

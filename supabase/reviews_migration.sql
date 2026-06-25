@@ -14,9 +14,11 @@ CREATE TABLE IF NOT EXISTS reviews (
 ALTER TABLE reviews ENABLE ROW LEVEL SECURITY;
 
 -- Anyone can read reviews
+DROP POLICY IF EXISTS "reviews_select" ON reviews;
 CREATE POLICY "reviews_select" ON reviews FOR SELECT USING (true);
 
 -- Only authenticated users can insert their own reviews
+DROP POLICY IF EXISTS "reviews_insert" ON reviews;
 CREATE POLICY "reviews_insert" ON reviews FOR INSERT
   WITH CHECK (auth.uid() = reviewer_id);
 

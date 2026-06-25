@@ -1,8 +1,8 @@
 import { Resend } from "resend";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const FROM = "runit <onboarding@resend.dev>";
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://runit-lake.vercel.app";
+const FROM = "Runly <notifications@runly.ca>";
+const APP_URL = process.env.NEXT_PUBLIC_APP_URL || "https://runly.ca";
 
 export async function sendNewBidEmail({
   posterEmail, posterName, runnerName, taskTitle, taskId, amount,
@@ -71,7 +71,7 @@ function emailHtml({ title, body, cta }: { title: string; body: string; cta: { l
 <body style="margin:0;padding:0;background:#FAFAF8;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
   <div style="max-width:520px;margin:40px auto;background:white;border-radius:16px;overflow:hidden;border:1px solid #E7E5E4;">
     <div style="background:#F97316;padding:24px 32px;">
-      <span style="font-size:28px;font-weight:800;color:white;letter-spacing:-1px;">runit</span>
+      <span style="font-size:28px;font-weight:800;color:white;letter-spacing:-1px;">Runly</span>
     </div>
     <div style="padding:32px;">
       <h1 style="font-size:22px;font-weight:800;color:#1C1917;margin:0 0 16px;letter-spacing:-0.5px;">${title}</h1>
@@ -81,7 +81,7 @@ function emailHtml({ title, body, cta }: { title: string; body: string; cta: { l
       </div>
     </div>
     <div style="padding:20px 32px;border-top:1px solid #F5F4F2;">
-      <p style="font-size:12px;color:#A8A29E;margin:0;">runit.ca — Canada's task marketplace. <a href="${APP_URL}" style="color:#F97316;text-decoration:none;">runit.ca</a></p>
+      <p style="font-size:12px;color:#A8A29E;margin:0;">Runly — Canada's task marketplace. <a href="${APP_URL}" style="color:#F97316;text-decoration:none;">runly.ca</a></p>
     </div>
   </div>
 </body>

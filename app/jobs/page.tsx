@@ -43,7 +43,7 @@ export default async function JobsPage() {
     <div style={{ minHeight: "100vh", backgroundColor: "#FAFAF8" }}>
       <nav style={{ backgroundColor: "white", borderBottom: "1px solid #E7E5E4", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between", position: "sticky", top: 0, zIndex: 10 }}>
         <a href="/" style={{ textDecoration: "none" }}>
-          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>runit</span>
+          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>Runly</span>
         </a>
         <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
           <a href="/dashboard" style={{ fontSize: 14, color: "#78716C", textDecoration: "none" }}>Dashboard</a>

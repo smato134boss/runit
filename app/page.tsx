@@ -15,7 +15,7 @@ const categories = [
 
 const testimonials = [
   {
-    quote: "I sent birthday flowers to my sister in Vancouver without leaving Hamilton. runit made it so easy!",
+    quote: "I sent birthday flowers to my sister in Vancouver without leaving Hamilton. Runly made it so easy!",
     name: "Maria K.",
     city: "Hamilton",
     color: "#FED7AA",
@@ -62,7 +62,7 @@ function Navbar() {
     >
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <a href="/" style={{ textDecoration: "none" }}>
-          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>runit</span>
+          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>Runly</span>
         </a>
 
         <div style={{ display: "flex", gap: 32, alignItems: "center" }}>
@@ -264,7 +264,7 @@ function Categories() {
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: 48 }}>
           <p style={{ fontSize: 13, fontWeight: 700, color: "#F97316", letterSpacing: "2px", textTransform: "uppercase", marginBottom: 12 }}>CATEGORIES</p>
-          <h2 style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 800, color: "#1C1917", letterSpacing: "-1px" }}>What can runit do for you?</h2>
+          <h2 style={{ fontSize: "clamp(28px, 4vw, 40px)", fontWeight: 800, color: "#1C1917", letterSpacing: "-1px" }}>What can Runly do for you?</h2>
         </div>
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16 }}>
@@ -424,7 +424,7 @@ function FinalCTA() {
           Ready to get things done?
         </h2>
         <p style={{ fontSize: 18, color: "rgba(255,255,255,0.85)", marginBottom: 40 }}>
-          Join thousands of Canadians who use runit every day.
+          Join thousands of Canadians who use Runly every day.
         </p>
         <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
           <a href="#"
@@ -451,7 +451,7 @@ function Footer() {
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1fr", gap: 48, marginBottom: 48 }}>
           <div>
-            <div style={{ fontSize: 26, fontWeight: 800, color: "#F97316", marginBottom: 12, letterSpacing: "-1px" }}>runit</div>
+            <div style={{ fontSize: 26, fontWeight: 800, color: "#F97316", marginBottom: 12, letterSpacing: "-1px" }}>Runly</div>
             <p style={{ fontSize: 14, color: "#78716C", lineHeight: 1.7, maxWidth: 260 }}>
               Canada&apos;s community-powered task marketplace. Get it done by someone nearby.
             </p>
@@ -478,7 +478,7 @@ function Footer() {
         </div>
 
         <div style={{ borderTop: "1px solid #292524", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
-          <p style={{ fontSize: 13, color: "#78716C" }}>© 2024 runit. All rights reserved.</p>
+          <p style={{ fontSize: 13, color: "#78716C" }}>© 2025 Runly. All rights reserved.</p>
           <div style={{ display: "flex", gap: 20 }}>
             {["Privacy Policy", "Terms of Service"].map(link => (
               <a key={link} href="#" style={{ fontSize: 13, color: "#78716C", textDecoration: "none" }}

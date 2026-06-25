@@ -41,7 +41,7 @@ export default function LoginPage() {
     <div style={{ minHeight: "100vh", backgroundColor: "#FAFAF8", display: "flex", flexDirection: "column" }}>
       <nav style={{ backgroundColor: "white", borderBottom: "1px solid #E7E5E4", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Link href="/" style={{ textDecoration: "none" }}>
-          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>runit</span>
+          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>Runly</span>
         </Link>
         <span style={{ fontSize: 14, color: "#78716C" }}>
           Don&apos;t have an account?{" "}
@@ -53,7 +53,7 @@ export default function LoginPage() {
         <div style={{ width: "100%", maxWidth: 440 }}>
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <h1 style={{ fontSize: 32, fontWeight: 800, color: "#1C1917", letterSpacing: "-1px", marginBottom: 8 }}>Welcome back</h1>
-            <p style={{ fontSize: 15, color: "#78716C" }}>Log in to your runit account</p>
+            <p style={{ fontSize: 15, color: "#78716C" }}>Log in to your Runly account</p>
           </div>
 
           <div style={{ backgroundColor: "white", borderRadius: 24, padding: 40, border: "1px solid #E7E5E4", boxShadow: "0 4px 24px rgba(0,0,0,0.06)" }}>

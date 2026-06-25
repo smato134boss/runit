@@ -136,7 +136,7 @@ export default function RegisterPage() {
     <div style={{ minHeight: "100vh", backgroundColor: "#FAFAF8", display: "flex", flexDirection: "column" }}>
       <nav style={{ backgroundColor: "white", borderBottom: "1px solid #E7E5E4", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Link href="/" style={{ textDecoration: "none" }}>
-          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>runit</span>
+          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>Runly</span>
         </Link>
         <span style={{ fontSize: 14, color: "#78716C" }}>
           Already have an account?{" "}
@@ -148,10 +148,10 @@ export default function RegisterPage() {
         <div style={{ width: "100%", maxWidth: 520 }}>
           <div style={{ textAlign: "center", marginBottom: 36 }}>
             <h1 style={{ fontSize: 32, fontWeight: 800, color: "#1C1917", letterSpacing: "-1px", marginBottom: 8 }}>
-              {step === 1 ? "Join runit" : `Almost there, ${form.name.split(" ")[0] || ""}! 👋`}
+              {step === 1 ? "Join Runly" : `Almost there, ${form.name.split(" ")[0] || ""}! 👋`}
             </h1>
             <p style={{ fontSize: 15, color: "#78716C" }}>
-              {step === 1 ? "How do you want to use runit?" : "Just a few more details"}
+              {step === 1 ? "How do you want to use Runly?" : "Just a few more details"}
             </p>
           </div>
 
@@ -277,7 +277,7 @@ export default function RegisterPage() {
                     style={{ marginTop: 2, accentColor: "#F97316", width: 16, height: 16, flexShrink: 0, cursor: "pointer" }}
                   />
                   <label htmlFor="terms-agree" style={{ fontSize: 13, color: "#44403C", lineHeight: 1.6, cursor: "pointer" }}>
-                    I understand that <strong>runit is a marketplace intermediary only</strong> and does not provide or guarantee any services. All tasks are performed by independent users. I agree to the{" "}
+                    I understand that <strong>Runly is a marketplace intermediary only</strong> and does not provide or guarantee any services. All tasks are performed by independent users. I agree to the{" "}
                     <Link href="/terms" target="_blank" style={{ color: "#F97316", textDecoration: "none", fontWeight: 600 }}>Terms of Service</Link>
                     {" "}and{" "}
                     <Link href="/privacy" target="_blank" style={{ color: "#F97316", textDecoration: "none", fontWeight: 600 }}>Privacy Policy</Link>.
@@ -303,7 +303,7 @@ export default function RegisterPage() {
           </div>
 
           <p style={{ textAlign: "center", fontSize: 13, color: "#A8A29E", marginTop: 20 }}>
-            runit is a marketplace intermediary. Services are provided by independent users.
+            Runly is a marketplace intermediary. Services are provided by independent users.
           </p>
         </div>
       </div>

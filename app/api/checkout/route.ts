@@ -37,15 +37,15 @@ export async function POST(req: NextRequest) {
         currency: "cad",
         product_data: {
           name: task.title,
-          description: `runit task payment • platform fee 15% included`,
+          description: `Runly task payment • platform fee 15% included`,
         },
         unit_amount: amountCents,
       },
       quantity: 1,
     }],
     mode: "payment",
-    success_url: `${process.env.NEXT_PUBLIC_APP_URL || "https://runit-lake.vercel.app"}/tasks/${taskId}?payment=success`,
-    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || "https://runit-lake.vercel.app"}/tasks/${taskId}?payment=cancelled`,
+    success_url: `${process.env.NEXT_PUBLIC_APP_URL || "https://runly.ca"}/tasks/${taskId}?payment=success`,
+    cancel_url: `${process.env.NEXT_PUBLIC_APP_URL || "https://runly.ca"}/tasks/${taskId}?payment=cancelled`,
     metadata: {
       taskId,
       bidId,

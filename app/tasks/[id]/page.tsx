@@ -91,7 +91,7 @@ export default async function TaskDetailPage({ params, searchParams }: { params:
       )}
       <nav style={{ backgroundColor: "white", borderBottom: "1px solid #E7E5E4", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <a href="/" style={{ textDecoration: "none" }}>
-          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>runit</span>
+          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>Runly</span>
         </a>
         <a href={isPoster ? "/tasks" : "/tasks/browse"} style={{ fontSize: 14, color: "#78716C", textDecoration: "none" }}>
           ← {isPoster ? "My tasks" : "Browse tasks"}
@@ -244,7 +244,7 @@ export default async function TaskDetailPage({ params, searchParams }: { params:
               )}
               <div style={{ borderTop: "1px solid #F5F4F2", paddingTop: 16, marginTop: 16 }}>
                 <p style={{ fontSize: 12, color: "#A8A29E", lineHeight: 1.5 }}>
-                  runit charges 15% platform fee on the completed task amount.
+                  Runly charges 15% platform fee on the completed task amount.
                 </p>
               </div>
               {task.status === "in_progress" && (

@@ -68,7 +68,7 @@ export default async function EarningsPage() {
         justifyContent: "space-between", position: "sticky", top: 0, zIndex: 10,
       }}>
         <a href="/" style={{ textDecoration: "none" }}>
-          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>runit</span>
+          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>Runly</span>
         </a>
         <div style={{ display: "flex", gap: 20, alignItems: "center" }}>
           <a href="/dashboard" style={{ fontSize: 14, color: "#78716C", textDecoration: "none" }}>Dashboard</a>
@@ -118,7 +118,7 @@ export default async function EarningsPage() {
         }}>
           <span style={{ fontSize: 16 }}>ℹ️</span>
           <p style={{ fontSize: 13, color: "#78716C", margin: 0 }}>
-            runit charges a <strong style={{ color: "#1C1917" }}>15% platform fee</strong> on each completed task.
+            Runly charges a <strong style={{ color: "#1C1917" }}>15% platform fee</strong> on each completed task.
             Amounts shown reflect your net payout after fee deduction.
           </p>
         </div>

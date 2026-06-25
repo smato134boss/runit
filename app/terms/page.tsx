@@ -3,7 +3,7 @@ export default function TermsPage() {
     <div style={{ minHeight: "100vh", backgroundColor: "#FAFAF8" }}>
       <nav style={{ backgroundColor: "white", borderBottom: "1px solid #E7E5E4", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <a href="/" style={{ textDecoration: "none" }}>
-          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>runit</span>
+          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>Runly</span>
         </a>
         <a href="/register" style={{ fontSize: 14, color: "#78716C", textDecoration: "none" }}>← Back</a>
       </nav>
@@ -18,20 +18,20 @@ export default function TermsPage() {
             Important — Platform Notice
           </p>
           <p style={{ fontSize: 15, lineHeight: 1.8, margin: 0 }}>
-            <strong>runit is a technology platform and marketplace intermediary only.</strong> runit does not provide, perform, or guarantee any tasks or services listed on the platform. All tasks are performed by independent users ("Runners") who are not employees, agents, or contractors of runit. Any agreement for services is made solely between the Poster and the Runner. runit bears no responsibility for the quality, safety, legality, or completion of any task. By using this platform, you acknowledge that runit acts solely as a neutral intermediary and payment facilitator.
+            <strong>Runly is a technology platform and marketplace intermediary only.</strong> Runly does not provide, perform, or guarantee any tasks or services listed on the platform. All tasks are performed by independent users ("Runners") who are not employees, agents, or contractors of Runly. Any agreement for services is made solely between the Poster and the Runner. Runly bears no responsibility for the quality, safety, legality, or completion of any task. By using this platform, you acknowledge that Runly acts solely as a neutral intermediary and payment facilitator.
           </p>
         </div>
 
         <Section title="1. Acceptance of Terms">
-          By creating an account on runit, you agree to be bound by these Terms of Service. If you do not agree, do not use the platform. runit is operated in Canada and these terms are governed by the laws of Ontario.
+          By creating an account on Runly, you agree to be bound by these Terms of Service. If you do not agree, do not use the platform. Runly is operated in Canada and these terms are governed by the laws of Ontario.
         </Section>
 
         <Section title="2. The Platform — Intermediary Role">
-          runit is a peer-to-peer marketplace that connects people who need tasks done ("Posters") with people willing to do them ("Runners"). <strong>runit is not a party to any service agreement between Posters and Runners, does not employ Runners, and does not control how tasks are performed.</strong> Runners are independent individuals acting on their own behalf. runit's role is limited to providing the technology platform and facilitating secure payments between users.
+          Runly is a peer-to-peer marketplace that connects people who need tasks done ("Posters") with people willing to do them ("Runners"). <strong>Runly is not a party to any service agreement between Posters and Runners, does not employ Runners, and does not control how tasks are performed.</strong> Runners are independent individuals acting on their own behalf. Runly's role is limited to providing the technology platform and facilitating secure payments between users.
         </Section>
 
         <Section title="3. Eligibility">
-          You must be at least 18 years old and legally able to enter contracts in Canada to use runit. By registering, you confirm that all information you provide is accurate and complete.
+          You must be at least 18 years old and legally able to enter contracts in Canada to use Runly. By registering, you confirm that all information you provide is accurate and complete.
         </Section>
 
         <Section title="4. User Accounts">
@@ -39,7 +39,7 @@ export default function TermsPage() {
             <li>One account per person. Creating multiple accounts to circumvent bans or fees is prohibited.</li>
             <li>You are responsible for maintaining the security of your account.</li>
             <li>You must use a real name and valid contact information.</li>
-            <li>runit reserves the right to suspend or terminate accounts that violate these terms.</li>
+            <li>Runly reserves the right to suspend or terminate accounts that violate these terms.</li>
           </ul>
         </Section>
 
@@ -56,8 +56,8 @@ export default function TermsPage() {
           <ul style={{ paddingLeft: 20, lineHeight: 2 }}>
             <li>All payments are processed securely through Stripe.</li>
             <li>When a Poster accepts a bid, funds are held in escrow until the task is confirmed complete.</li>
-            <li>runit charges a platform fee of 15% on each completed task, deducted from the Runner's payout.</li>
-            <li>Refunds are issued at runit's discretion in cases of non-performance or fraud.</li>
+            <li>Runly charges a platform fee of 15% on each completed task, deducted from the Runner's payout.</li>
+            <li>Refunds are issued at Runly's discretion in cases of non-performance or fraud.</li>
             <li>All prices are in Canadian Dollars (CAD) and are subject to applicable taxes.</li>
           </ul>
         </Section>
@@ -65,8 +65,8 @@ export default function TermsPage() {
         <Section title="7. Cancellations and Disputes">
           <ul style={{ paddingLeft: 20, lineHeight: 2 }}>
             <li>A Poster may cancel a task before a bid is accepted at no charge.</li>
-            <li>Once payment is in escrow, cancellation requests are reviewed by runit support.</li>
-            <li>In case of a dispute, both parties must provide evidence. runit's decision is final.</li>
+            <li>Once payment is in escrow, cancellation requests are reviewed by Runly support.</li>
+            <li>In case of a dispute, both parties must provide evidence. Runly's decision is final.</li>
           </ul>
         </Section>
 
@@ -75,15 +75,15 @@ export default function TermsPage() {
         </Section>
 
         <Section title="9. Limitation of Liability">
-          runit is not liable for any damages arising from transactions between users, including loss of property, personal injury, or financial loss. Use the platform at your own risk. runit's total liability to any user shall not exceed the fees paid to runit in the 3 months prior to the claim.
+          Runly is not liable for any damages arising from transactions between users, including loss of property, personal injury, or financial loss. Use the platform at your own risk. Runly's total liability to any user shall not exceed the fees paid to Runly in the 3 months prior to the claim.
         </Section>
 
         <Section title="10. Changes to Terms">
-          runit may update these terms at any time. Continued use of the platform after changes constitutes acceptance of the new terms. Material changes will be communicated by email.
+          Runly may update these terms at any time. Continued use of the platform after changes constitutes acceptance of the new terms. Material changes will be communicated by email.
         </Section>
 
         <Section title="11. Contact">
-          For questions about these terms, contact us at: <strong>support@runit.ca</strong>
+          For questions about these terms, contact us at: <strong>support@runly.ca</strong>
         </Section>
       </div>
     </div>

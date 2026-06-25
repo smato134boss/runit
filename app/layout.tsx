@@ -9,7 +9,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "runit — Get it done by someone nearby",
+  title: "Runly — Get it done by someone nearby",
   description: "Post any errand or task — a neighbour in your city picks it up and gets it done. Canada's community task marketplace.",
 };
 

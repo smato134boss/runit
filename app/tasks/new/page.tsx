@@ -86,7 +86,7 @@ export default function NewTaskPage() {
     <div style={{ minHeight: "100vh", backgroundColor: "#FAFAF8" }}>
       <nav style={{ backgroundColor: "white", borderBottom: "1px solid #E7E5E4", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <a href="/" style={{ textDecoration: "none" }}>
-          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>runit</span>
+          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>Runly</span>
         </a>
         <a href="/dashboard" style={{ fontSize: 14, color: "#78716C", textDecoration: "none" }}>← Back to dashboard</a>
       </nav>

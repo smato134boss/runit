@@ -24,7 +24,7 @@ export default async function DashboardPage() {
       {/* Navbar */}
       <nav style={{ backgroundColor: "white", borderBottom: "1px solid #E7E5E4", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <a href="/" style={{ textDecoration: "none" }}>
-          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>runit</span>
+          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>Runly</span>
         </a>
         <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
           <span style={{ fontSize: 14, color: "#78716C" }}>{city}</span>
@@ -44,7 +44,7 @@ export default async function DashboardPage() {
             Hey, {name.split(" ")[0]} 👋
           </h1>
           <p style={{ fontSize: 16, color: "#78716C" }}>
-            Welcome to runit. You&apos;re joined as a <strong style={{ color: "#F97316" }}>{role === "poster" ? "Task Poster" : "Runner"}</strong> in {city}.
+            Welcome to Runly. You&apos;re joined as a <strong style={{ color: "#F97316" }}>{role === "poster" ? "Task Poster" : "Runner"}</strong> in {city}.
           </p>
         </div>
 

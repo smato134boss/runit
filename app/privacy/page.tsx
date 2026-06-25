@@ -3,7 +3,7 @@ export default function PrivacyPage() {
     <div style={{ minHeight: "100vh", backgroundColor: "#FAFAF8" }}>
       <nav style={{ backgroundColor: "white", borderBottom: "1px solid #E7E5E4", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <a href="/" style={{ textDecoration: "none" }}>
-          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>runit</span>
+          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>Runly</span>
         </a>
         <a href="/register" style={{ fontSize: 14, color: "#78716C", textDecoration: "none" }}>← Back</a>
       </nav>
@@ -13,7 +13,7 @@ export default function PrivacyPage() {
         <p style={{ fontSize: 14, color: "#A8A29E", marginBottom: 48 }}>Last updated: June 2026</p>
 
         <p style={{ fontSize: 15, color: "#44403C", lineHeight: 1.8, marginBottom: 40, padding: "20px 24px", backgroundColor: "#FFF7ED", borderRadius: 12, border: "1px solid #FED7AA" }}>
-          runit is committed to protecting your privacy in accordance with Canada's <strong>Personal Information Protection and Electronic Documents Act (PIPEDA)</strong> and applicable provincial privacy laws.
+          Runly is committed to protecting your privacy in accordance with Canada's <strong>Personal Information Protection and Electronic Documents Act (PIPEDA)</strong> and applicable provincial privacy laws.
         </p>
 
         <Section title="1. Information We Collect">
@@ -35,7 +35,7 @@ export default function PrivacyPage() {
 
         <Section title="2. How We Use Your Information">
           <ul style={{ paddingLeft: 20, lineHeight: 2 }}>
-            <li>To provide, operate, and improve the runit platform</li>
+            <li>To provide, operate, and improve the Runly platform</li>
             <li>To facilitate transactions between Posters and Runners</li>
             <li>To send transactional emails (new bids, task updates, payment confirmations)</li>
             <li>To verify identity and prevent fraud</li>
@@ -50,12 +50,12 @@ export default function PrivacyPage() {
           <ul style={{ paddingLeft: 20, lineHeight: 2, marginTop: 8 }}>
             <li><strong>With other users:</strong> Your name, city, rating, and reviews are visible to other users. Your contact details are only shared after a task agreement is reached.</li>
             <li><strong>With service providers:</strong> Stripe (payments), Supabase (database), Vercel (hosting), Resend (email). These providers are bound by confidentiality agreements.</li>
-            <li><strong>For legal compliance:</strong> When required by law, court order, or to protect the rights of runit and its users.</li>
+            <li><strong>For legal compliance:</strong> When required by law, court order, or to protect the rights of Runly and its users.</li>
           </ul>
         </Section>
 
         <Section title="4. Data Retention">
-          We retain your personal data for as long as your account is active or as needed to provide services. You may request deletion of your account and associated data at any time by contacting <strong>support@runit.ca</strong>. Some data may be retained for legal or fraud prevention purposes for up to 7 years.
+          We retain your personal data for as long as your account is active or as needed to provide services. You may request deletion of your account and associated data at any time by contacting <strong>support@runly.ca</strong>. Some data may be retained for legal or fraud prevention purposes for up to 7 years.
         </Section>
 
         <Section title="5. Your Rights (PIPEDA)">
@@ -67,29 +67,29 @@ export default function PrivacyPage() {
             <li>Request deletion of your account and data</li>
             <li>File a complaint with the Office of the Privacy Commissioner of Canada</li>
           </ul>
-          To exercise these rights, contact us at <strong>support@runit.ca</strong>.
+          To exercise these rights, contact us at <strong>support@runly.ca</strong>.
         </Section>
 
         <Section title="6. Cookies">
-          runit uses essential cookies for authentication and session management. We do not use advertising or tracking cookies. You can disable cookies in your browser settings, but this may affect platform functionality.
+          Runly uses essential cookies for authentication and session management. We do not use advertising or tracking cookies. You can disable cookies in your browser settings, but this may affect platform functionality.
         </Section>
 
         <Section title="7. Security">
-          We use industry-standard security measures including encrypted connections (HTTPS), row-level security on our database, and secure third-party payment processing. However, no system is 100% secure — report any vulnerabilities to <strong>security@runit.ca</strong>.
+          We use industry-standard security measures including encrypted connections (HTTPS), row-level security on our database, and secure third-party payment processing. However, no system is 100% secure — report any vulnerabilities to <strong>security@runly.ca</strong>.
         </Section>
 
         <Section title="8. Children's Privacy">
-          runit is not intended for users under 18 years of age. We do not knowingly collect personal information from minors.
+          Runly is not intended for users under 18 years of age. We do not knowingly collect personal information from minors.
         </Section>
 
         <Section title="9. Changes to This Policy">
-          We may update this policy from time to time. We will notify you of material changes by email. Continued use of runit after changes constitutes acceptance of the updated policy.
+          We may update this policy from time to time. We will notify you of material changes by email. Continued use of Runly after changes constitutes acceptance of the updated policy.
         </Section>
 
         <Section title="10. Contact">
           For privacy-related questions or requests:<br />
-          <strong>Email:</strong> support@runit.ca<br />
-          <strong>Privacy Officer:</strong> runit Canada Inc.
+          <strong>Email:</strong> support@runly.ca<br />
+          <strong>Privacy Officer:</strong> Runly Canada Inc.
         </Section>
       </div>
     </div>

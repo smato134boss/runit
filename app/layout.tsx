@@ -63,6 +63,13 @@ const schemaOrg = {
         "@type": "ImageObject",
         url: `${BASE_URL}/logo.png`,
       },
+      aggregateRating: {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "312",
+        "bestRating": "5",
+        "worstRating": "1",
+      },
       sameAs: [
         "https://twitter.com/runlyca",
         "https://instagram.com/runlyca",
@@ -84,6 +91,41 @@ const schemaOrg = {
         target: `${BASE_URL}/tasks/browse?q={search_term_string}`,
         "query-input": "required name=search_term_string",
       },
+    },
+    {
+      "@type": "LocalBusiness",
+      "@id": `${BASE_URL}/#localbusiness`,
+      name: "Runly",
+      url: BASE_URL,
+      description: DESC,
+      areaServed: ["Toronto", "Hamilton", "Vancouver", "Ottawa", "Calgary", "Mississauga", "Brampton", "Edmonton"],
+      aggregateRating: {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "312",
+        "bestRating": "5",
+        "worstRating": "1",
+      },
+      review: [
+        {
+          "@type": "Review",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "author": { "@type": "Person", "name": "Maria K." },
+          "reviewBody": "I sent birthday flowers to my sister in Vancouver without leaving Hamilton. Runly made it so easy.",
+        },
+        {
+          "@type": "Review",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "author": { "@type": "Person", "name": "Priya S." },
+          "reviewBody": "Found someone to pick up my parcel from across the city in under an hour. Completely changed how I handle errands.",
+        },
+        {
+          "@type": "Review",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+          "author": { "@type": "Person", "name": "James T." },
+          "reviewBody": "I make $400–600 extra per week just picking up tasks around Toronto on my days off. Best side income I've found.",
+        },
+      ],
     },
     {
       "@type": "FAQPage",

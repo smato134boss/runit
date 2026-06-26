@@ -16,5 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE}/ottawa`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE}/calgary`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
     { url: `${BASE}/edmonton`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
+    { url: `${BASE}/mississauga`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
+    { url: `${BASE}/brampton`, lastModified: new Date(), changeFrequency: "weekly", priority: 0.85 },
   ];
 }

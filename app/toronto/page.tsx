@@ -6,7 +6,7 @@ const TASKS = "8,400+";
 const RATING = "4.9";
 
 export const metadata: Metadata = {
-  title: "Errand & Task Service in Toronto | Runly",
+  title: { absolute: "Errand & Task Service in Toronto | Runly" },
   description:
     "Post any errand in Toronto and a verified local runner picks it up — same day. Grocery runs, parcel delivery, home tasks and more. Free to post.",
   alternates: {

@@ -38,6 +38,33 @@ const pricingExamples = [
 
 const cities = ["Toronto", "Hamilton", "Vancouver", "Ottawa", "Calgary", "Mississauga", "Brampton", "Edmonton"];
 
+const faqs = [
+  {
+    q: "How much does it cost to post a task?",
+    a: "Posting a task on Runly is completely free. You only pay when a runner accepts your task and completes it. You set your own budget — runners bid and you choose the offer that works for you.",
+  },
+  {
+    q: "Is Runly available across Canada?",
+    a: "Yes. Runly is live in Toronto, Hamilton, Vancouver, Ottawa, Calgary, Mississauga, Brampton, Edmonton, and growing. If you don't see your city yet, post a task anyway — we're expanding fast.",
+  },
+  {
+    q: "How do I know the runner is trustworthy?",
+    a: "Every runner on Runly completes identity verification before their first task. You can also see their rating, completed task count, and public reviews before you accept their bid.",
+  },
+  {
+    q: "When does the runner get paid?",
+    a: "Payment is held securely by Runly until you confirm the task is done. The runner only receives payment after you mark the task as complete — so you're always protected.",
+  },
+  {
+    q: "What kinds of tasks can I post?",
+    a: "Almost anything: parcel pickup and delivery, grocery shopping, sending gifts, home assembly, dog walking, airport drop-offs, admin errands, and more. If it's legal and local, you can post it.",
+  },
+  {
+    q: "How quickly can a runner start my task?",
+    a: "Most tasks in active cities receive bids within 15–30 minutes. Same-day completion is common for delivery and shopping tasks. You control the schedule — set a time that works for you.",
+  },
+];
+
 // ─── Hooks ───────────────────────────────────────────────────────────────────
 
 function useCounter(target: number, duration = 1800, start = false) {
@@ -573,6 +600,53 @@ function Cities() {
   );
 }
 
+// ─── FAQ ─────────────────────────────────────────────────────────────────────
+
+function FAQ() {
+  const [open, setOpen] = useState<number | null>(null);
+  return (
+    <section className="py-16 md:py-24 px-6" style={{ background: "#FAFAF8" }}>
+      <div className="max-w-[760px] mx-auto">
+        <p className="text-xs font-bold tracking-[0.18em] uppercase mb-4 text-center" style={{ color: "#F97316" }}>FAQ</p>
+        <h2 className="font-extrabold text-center leading-tight mb-12" style={{ fontSize: "clamp(28px,4vw,44px)", letterSpacing: "-1.5px", color: "#1C1917" }}>
+          Common questions
+        </h2>
+        <div className="flex flex-col gap-3">
+          {faqs.map((faq, i) => (
+            <div
+              key={i}
+              className="rounded-2xl overflow-hidden border transition-all"
+              style={{ borderColor: open === i ? "#F97316" : "#E7E5E4", background: "#fff" }}
+            >
+              <button
+                className="w-full text-left px-6 py-5 flex items-center justify-between gap-4"
+                onClick={() => setOpen(open === i ? null : i)}
+                aria-expanded={open === i}
+              >
+                <span className="font-600 text-base leading-snug" style={{ color: "#1C1917", fontWeight: 600 }}>{faq.q}</span>
+                <span
+                  className="flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-transform text-sm font-bold"
+                  style={{
+                    background: open === i ? "#C2410C" : "#F5F5F4",
+                    color: open === i ? "#fff" : "#78716C",
+                    transform: open === i ? "rotate(45deg)" : "rotate(0deg)",
+                    transition: "all 0.2s ease",
+                  }}
+                >+</span>
+              </button>
+              {open === i && (
+                <div className="px-6 pb-5 text-base leading-relaxed" style={{ color: "#57534E" }}>
+                  {faq.a}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ─── Final CTA ────────────────────────────────────────────────────────────────
 
 function FinalCTA() {
@@ -685,6 +759,7 @@ export default function Home() {
       <EarnMoney />
       <Testimonials />
       <Cities />
+      <FAQ />
       <FinalCTA />
       <Footer />
     </main>

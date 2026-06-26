@@ -30,6 +30,10 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: BASE_URL,
+    languages: {
+      "en-CA": BASE_URL,
+      "x-default": BASE_URL,
+    },
   },
   verification: {
     google: "d4Y4GSwByh2iaredP-dhCWeA1s7hLC_-zgs7WdM-FmY",
@@ -37,6 +41,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_CA",
+    alternateLocale: ["fr_CA"],
     url: BASE_URL,
     siteName: "Runly",
     title: TITLE,

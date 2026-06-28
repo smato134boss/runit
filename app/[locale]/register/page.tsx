@@ -92,9 +92,9 @@ export default function RegisterPage() {
 
     if (signUpError) {
       const msg = signUpError.message;
-      setError(!msg || msg === "{}" || msg === "[object Object]"
-        ? (isFr ? "Inscription impossible. Veuillez réessayer." : "Registration failed. Please try again.")
-        : msg);
+      const code = (signUpError as any).code || (signUpError as any).status || "";
+      const display = (msg && msg !== "{}" && msg !== "[object Object]") ? msg : code ? `Error ${code}` : "Registration failed. Please try again.";
+      setError(display);
       setLoading(false);
       return;
     }

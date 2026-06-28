@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter, useParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
-import Logo from "@/components/Logo";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -91,7 +90,7 @@ export default function LoginPage() {
     <div style={{ minHeight: "100vh", backgroundColor: "#FAFAF8", display: "flex", flexDirection: "column" }}>
       <nav style={{ backgroundColor: "white", borderBottom: "1px solid #E7E5E4", padding: "0 24px", height: 64, display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <Link href={`/${locale}`} style={{ textDecoration: "none" }}>
-          <Logo size={26} />
+          <span style={{ fontSize: 26, fontWeight: 800, color: "#F97316", letterSpacing: "-1px" }}>Runly</span>
         </Link>
         <span style={{ fontSize: 14, color: "#78716C" }}>
           {t.noAccount}{" "}

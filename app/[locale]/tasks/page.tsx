@@ -81,7 +81,7 @@ export default async function MyTasksPage({ params }: { params: Promise<{ locale
         ) : (
           <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
             {tasks.map((task) => (
-              <TaskCard key={task.id} task={task as any} locale={locale} t={t} />
+              <TaskCard key={task.id} task={task as any} locale={locale} />
             ))}
           </div>
         )}

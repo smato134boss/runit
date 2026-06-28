@@ -19,15 +19,17 @@ const STATUS_STYLE: Record<string, { bg: string; color: string; label: string }>
   cancelled:   { bg: "#FEF2F2", color: "#DC2626", label: "Cancelled" },
 };
 
-export default function TaskCard({ task, locale, t }: {
-  task: Task;
-  locale: string;
-  t: { noOffers: string; overdue: string; offers: (n: number) => string };
-}) {
+export default function TaskCard({ task, locale }: { task: Task; locale: string }) {
+  const isFr = locale === "fr";
   const st = STATUS_STYLE[task.status] || STATUS_STYLE.open;
   const bidCount = task.bids?.[0]?.count ?? 0;
   const deadline = task.deadline ? new Date(task.deadline) : null;
   const isOverdue = deadline && deadline < new Date() && task.status === "open";
+  const t = {
+    noOffers: isFr ? "Aucune offre" : "No offers yet",
+    overdue:  isFr ? "En retard" : "Overdue",
+    offers:   (n: number) => isFr ? `${n} offre${n > 1 ? "s" : ""}` : `${n} offer${n > 1 ? "s" : ""}`,
+  };
 
   return (
     <a href={`/${locale}/tasks/${task.id}`} style={{ textDecoration: "none" }}>

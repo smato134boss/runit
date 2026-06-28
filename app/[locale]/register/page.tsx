@@ -91,7 +91,10 @@ export default function RegisterPage() {
     });
 
     if (signUpError) {
-      setError(signUpError.message);
+      const msg = signUpError.message;
+      setError(!msg || msg === "{}" || msg === "[object Object]"
+        ? (isFr ? "Inscription impossible. Veuillez réessayer." : "Registration failed. Please try again.")
+        : msg);
       setLoading(false);
       return;
     }
@@ -109,6 +112,12 @@ export default function RegisterPage() {
 
       if (profileError?.code === "23505") {
         setError(t.phoneTaken);
+        setLoading(false);
+        return;
+      }
+
+      if (profileError) {
+        setError(isFr ? "Erreur lors de la création du profil. Veuillez réessayer." : "Error creating profile. Please try again.");
         setLoading(false);
         return;
       }

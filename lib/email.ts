@@ -19,7 +19,7 @@ export async function sendNewBidEmail({
       body: `<p>Hi ${posterName},</p>
 <p><strong>${runnerName}</strong> sent an offer of <strong>$${amount.toFixed(0)} CAD</strong> on your task:</p>
 <p style="font-size:18px;font-weight:700;color:#1C1917;">${taskTitle}</p>`,
-      cta: { label: "Review the offer", url: `${APP_URL}/tasks/${taskId}` },
+      cta: { label: "Review the offer", url: `${APP_URL}/en/tasks/${taskId}` },
     }),
   });
 }
@@ -39,7 +39,7 @@ export async function sendBidAcceptedEmail({
       body: `<p>Hi ${runnerName},</p>
 <p><strong>${posterName}</strong> accepted your offer of <strong>$${amount.toFixed(0)} CAD</strong>.</p>
 <p>Payment has been secured in escrow. Complete the task and the money is yours.</p>`,
-      cta: { label: "Open task & chat", url: `${APP_URL}/tasks/${taskId}` },
+      cta: { label: "Open task & chat", url: `${APP_URL}/en/tasks/${taskId}` },
     }),
   });
 }

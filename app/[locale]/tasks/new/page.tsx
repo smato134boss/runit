@@ -198,7 +198,7 @@ export default function NewTaskPage() {
                 <label style={{ fontSize: 13, color: "#78716C", fontWeight: 500, display: "block", marginBottom: 6 }}>
                   {t.deadline} <span style={{ color: "#A8A29E" }}>{t.optional}</span>
                 </label>
-                <input type="datetime-local" value={form.deadline} onChange={e => update("deadline", e.target.value)} style={inputStyle}
+                <input type="datetime-local" lang="en-CA" value={form.deadline} onChange={e => update("deadline", e.target.value)} style={inputStyle}
                   onFocus={e => e.target.style.borderColor = "#F97316"} onBlur={e => e.target.style.borderColor = "#E7E5E4"} />
               </div>
             </div>

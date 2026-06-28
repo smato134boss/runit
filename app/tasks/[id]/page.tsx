@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import BidForm from "./BidForm";
 import AcceptBidButton from "./AcceptBidButton";
 import MarkAsDoneButton from "./MarkAsDoneButton";
+import CancelTaskButton from "./CancelTaskButton";
 import Chat from "./Chat";
 import ReviewForm from "./ReviewForm";
 
@@ -249,6 +250,17 @@ export default async function TaskDetailPage({ params, searchParams }: { params:
               </div>
               {task.status === "in_progress" && (
                 <MarkAsDoneButton taskId={task.id} />
+              )}
+              {task.status === "open" && (
+                <>
+                  <a href={`/tasks/${task.id}/edit`}
+                    style={{ display: "block", width: "100%", marginTop: 12, padding: "10px", borderRadius: 10, border: "2px solid #E7E5E4", backgroundColor: "white", fontSize: 13, fontWeight: 600, color: "#1C1917", textDecoration: "none", textAlign: "center", transition: "all 0.15s", boxSizing: "border-box" }}
+                    onMouseEnter={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.borderColor = "#F97316"; e.currentTarget.style.color = "#F97316"; }}
+                    onMouseLeave={(e: React.MouseEvent<HTMLAnchorElement>) => { e.currentTarget.style.borderColor = "#E7E5E4"; e.currentTarget.style.color = "#1C1917"; }}>
+                    ✏️ Edit task
+                  </a>
+                  <CancelTaskButton taskId={task.id} />
+                </>
               )}
             </div>
           )}

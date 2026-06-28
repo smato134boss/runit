@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { getLocale } from "next-intl/server";
 import "./globals.css";
 
 const jakarta = Plus_Jakarta_Sans({
@@ -159,20 +160,23 @@ const schemaOrg = {
   ],
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
   return (
-    <html lang="en" className={`${jakarta.variable} h-full`}>
+    <html lang={locale} className={`${jakarta.variable} h-full`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaOrg) }}
         />
       </head>
-      <body className="min-h-full flex flex-col antialiased">{children}</body>
+      <body className="min-h-full flex flex-col antialiased">
+        {children}
+      </body>
     </html>
   );
 }

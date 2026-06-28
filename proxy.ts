@@ -1,44 +1,63 @@
+import createMiddleware from "next-intl/middleware";
+import { routing } from "./i18n/routing";
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 
-export async function proxy(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({ request });
+const intlMiddleware = createMiddleware(routing);
 
+export async function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const isAdmin = pathname.startsWith("/admin");
+
+  // For admin routes: skip locale redirect, just refresh Supabase session
+  if (isAdmin) {
+    const response = NextResponse.next();
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          getAll() { return request.cookies.getAll(); },
+          setAll(cookiesToSet) {
+            cookiesToSet.forEach(({ name, value, options }) =>
+              response.cookies.set(name, value, options)
+            );
+          },
+        },
+      }
+    );
+    await supabase.auth.getUser();
+    return response;
+  }
+
+  // Run next-intl locale routing first
+  const intlResponse = intlMiddleware(request);
+
+  // If next-intl issued a redirect (to add locale prefix), honor it
+  if (intlResponse.status >= 300 && intlResponse.status < 400) {
+    return intlResponse;
+  }
+
+  // Supabase session cookie refresh (needed for token rotation)
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
-        getAll() {
-          return request.cookies.getAll();
-        },
+        getAll() { return request.cookies.getAll(); },
         setAll(cookiesToSet) {
-          cookiesToSet.forEach(({ name, value }) =>
-            request.cookies.set(name, value)
-          );
-          supabaseResponse = NextResponse.next({ request });
           cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
+            (intlResponse as NextResponse).cookies.set(name, value, options)
           );
         },
       },
     }
   );
 
-  const { data: { user } } = await supabase.auth.getUser();
-
-  const protectedPaths = ["/dashboard", "/tasks", "/jobs", "/earnings", "/profile"];
-  if (!user && protectedPaths.some(p => request.nextUrl.pathname.startsWith(p))) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
-
-  if (user && (request.nextUrl.pathname === "/login" || request.nextUrl.pathname === "/register")) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
-  }
-
-  return supabaseResponse;
+  await supabase.auth.getUser();
+  return intlResponse;
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)"],
+  matcher: ["/((?!_next|_vercel|auth|api|\\..).*)"],
 };

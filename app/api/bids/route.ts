@@ -59,7 +59,9 @@ export async function POST(req: NextRequest) {
       taskTitle: task.title,
       taskId: task.id,
       amount: parseFloat(amount),
-    }).catch(() => {});
+    }).catch((err) => console.error("[bids] email error:", err?.message));
+  } else {
+    console.warn("[bids] no poster email found for task", taskId);
   }
 
   return NextResponse.json({ success: true });

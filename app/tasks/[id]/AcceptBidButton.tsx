@@ -1,9 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function AcceptBidButton({ bidId, taskId, runnerId, amount }: { bidId: string; taskId: string; runnerId: string; amount: number }) {
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) setLoading(false);
+    };
+    window.addEventListener("pageshow", handlePageShow);
+    return () => window.removeEventListener("pageshow", handlePageShow);
+  }, []);
 
   const handleAccept = async () => {
     setLoading(true);

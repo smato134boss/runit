@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { CITY_PHOTOS } from "@/lib/cityPhotos";
 
 export interface CityData {
   slug: string;
@@ -72,6 +74,7 @@ export default function CityPage({ city }: { city: CityData }) {
   const allTasks = city.airportTask
     ? [...city.popularTasks, city.airportTask]
     : city.popularTasks;
+  const photo = CITY_PHOTOS[city.slug];
 
   return (
     <>
@@ -83,8 +86,22 @@ export default function CityPage({ city }: { city: CityData }) {
       {/* ── Hero ── */}
       <section
         className="relative overflow-hidden px-6 pt-24 pb-20 md:pt-32 md:pb-28"
-        style={{ background: "linear-gradient(150deg,#1C1917 0%,#292524 100%)" }}
+        style={{ background: "#1C1917" }}
       >
+        {photo && (
+          <Image
+            src={photo.url}
+            alt={`${city.name} skyline`}
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
+        )}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{ background: "linear-gradient(150deg,rgba(28,25,23,0.92) 0%,rgba(41,37,34,0.88) 100%)" }}
+        />
         <div
           className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full pointer-events-none"
           style={{ background: "radial-gradient(circle,rgba(249,115,22,0.15) 0%,transparent 70%)" }}
@@ -93,6 +110,17 @@ export default function CityPage({ city }: { city: CityData }) {
           className="absolute inset-0 pointer-events-none opacity-[0.03]"
           style={{ backgroundImage: "radial-gradient(circle,#fff 1px,transparent 1px)", backgroundSize: "40px 40px" }}
         />
+        {photo && (
+          <a
+            href={photo.sourceUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute bottom-3 right-4 text-[10px] tracking-wide z-10 hover:underline"
+            style={{ color: "rgba(255,255,255,0.35)" }}
+          >
+            Photo: {photo.author} ({photo.license})
+          </a>
+        )}
         <div className="max-w-[800px] mx-auto relative text-center">
           <div
             className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold tracking-widest uppercase mb-6"

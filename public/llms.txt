@@ -1,0 +1,39 @@
+# Runly
+
+> Task marketplace connecting people across Canada with verified local runners for errands, delivery, and same-day tasks. Post a task for free; pay only when it's done.
+
+## What Runly does
+- Post any errand or task — parcel pickup and delivery, grocery shopping, sending gifts, home assembly, dog walking, airport drop-offs, admin errands, and more — and a verified local runner in your city picks it up.
+- Posting a task is free. Payment is held securely in escrow until the poster confirms the task is complete, then released to the runner.
+- Runners complete identity verification before their first task; posters can see a runner's rating, completed task count, and reviews before accepting a bid.
+- Most tasks receive bids within 15–30 minutes; same-day completion is common for delivery and shopping tasks.
+- Available in English and French.
+
+## Coverage
+Live in 23 Canadian cities: Toronto, Hamilton, Mississauga, Brampton, London, Kitchener, Ottawa, Vancouver, Victoria, Kelowna, Calgary, Edmonton, Montreal, Quebec City, Laval, Winnipeg, Saskatoon, Regina, Halifax, Moncton, Fredericton, St. John's, Charlottetown.
+
+## Key pages
+- Homepage: https://runly.ca/en
+- Browse open tasks: https://runly.ca/en/tasks/browse
+- Post a task: https://runly.ca/en/tasks/new
+- Become a runner / earnings: https://runly.ca/en/earnings
+- City pages: https://runly.ca/en/{city-slug}, e.g. https://runly.ca/en/toronto, https://runly.ca/en/vancouver
+
+## FAQ
+Q: How much does it cost to post a task?
+A: Posting a task on Runly is completely free. You only pay when a runner accepts and completes it.
+
+Q: Is Runly available across Canada?
+A: Yes. Runly is live in 23 Canadian cities, including Toronto, Vancouver, Montreal, Calgary, Ottawa, Edmonton, Winnipeg, and Halifax, and growing.
+
+Q: How do I know the runner is trustworthy?
+A: Every runner completes identity verification before their first task. You can see their rating, completed task count, and reviews before accepting a bid.
+
+Q: When does the runner get paid?
+A: Payment is held securely by Runly until you confirm the task is done. The runner only receives payment after you mark the task as complete.
+
+Q: What kinds of tasks can I post?
+A: Almost anything: parcel pickup and delivery, grocery shopping, sending gifts, home assembly, dog walking, airport drop-offs, admin errands, and more.
+
+Q: How quickly can a runner start my task?
+A: Most tasks receive bids within 15–30 minutes. Same-day completion is common for delivery and shopping tasks.

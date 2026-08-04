@@ -89,8 +89,28 @@ export default function EditTaskLocalePage() {
   const [loading, setLoading] = useState(false);
   const [fetching, setFetching] = useState(true);
   const [error, setError] = useState("");
+  const [dateParts, setDateParts] = useState({ day: "", month: "", year: "", time: "" });
 
   const update = (field: string, value: string) => setForm(prev => ({ ...prev, [field]: value }));
+
+  function updateDatePart(part: "day" | "month" | "year" | "time", raw: string) {
+    let value = raw;
+    if (part === "time") {
+      const digits = raw.replace(/\D/g, "").slice(0, 4);
+      value = digits.length > 2 ? `${digits.slice(0, 2)}:${digits.slice(2)}` : digits;
+    } else {
+      const maxLen = part === "year" ? 4 : 2;
+      value = raw.replace(/\D/g, "").slice(0, maxLen);
+    }
+    const next = { ...dateParts, [part]: value };
+    setDateParts(next);
+    const timeValid = /^\d{2}:\d{2}$/.test(next.time);
+    if (next.day.length === 2 && next.month.length === 2 && next.year.length === 4 && timeValid) {
+      update("deadline", `${next.year}-${next.month}-${next.day}T${next.time}`);
+    } else {
+      update("deadline", "");
+    }
+  }
 
   useEffect(() => {
     const load = async () => {
@@ -102,6 +122,7 @@ export default function EditTaskLocalePage() {
       if (!task || task.poster_id !== user.id) { router.push(`/${locale}/tasks`); return; }
       if (task.status !== "open") { router.push(`/${locale}/tasks/${taskId}`); return; }
 
+      const deadline = task.deadline ? new Date(task.deadline).toISOString().slice(0, 16) : "";
       setForm({
         title: task.title || "",
         description: task.description || "",
@@ -109,8 +130,13 @@ export default function EditTaskLocalePage() {
         from_city: task.from_city || "",
         to_city: task.to_city || "",
         budget: task.budget?.toString() || "",
-        deadline: task.deadline ? new Date(task.deadline).toISOString().slice(0, 16) : "",
+        deadline,
       });
+      if (deadline) {
+        const [datePart, time] = deadline.split("T");
+        const [year, month, day] = datePart.split("-");
+        setDateParts({ day, month, year, time });
+      }
       setFetching(false);
     };
     load();
@@ -226,8 +252,22 @@ export default function EditTaskLocalePage() {
               </div>
               <div>
                 <label style={{ fontSize: 13, color: "#78716C", fontWeight: 500, display: "block", marginBottom: 6 }}>{t.deadline} <span style={{ color: "#A8A29E" }}>{t.optional}</span></label>
-                <input type="datetime-local" value={form.deadline} onChange={e => update("deadline", e.target.value)} style={inputStyle}
-                  onFocus={e => e.target.style.borderColor = "#F97316"} onBlur={e => e.target.style.borderColor = "#E7E5E4"} />
+                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                  <input type="text" inputMode="numeric" placeholder="DD" value={dateParts.day}
+                    onChange={e => updateDatePart("day", e.target.value)} style={{ ...inputStyle, width: 52, textAlign: "center" as const, padding: "12px 4px" }}
+                    onFocus={e => e.target.style.borderColor = "#F97316"} onBlur={e => e.target.style.borderColor = "#E7E5E4"} />
+                  <span style={{ color: "#A8A29E" }}>.</span>
+                  <input type="text" inputMode="numeric" placeholder="MM" value={dateParts.month}
+                    onChange={e => updateDatePart("month", e.target.value)} style={{ ...inputStyle, width: 52, textAlign: "center" as const, padding: "12px 4px" }}
+                    onFocus={e => e.target.style.borderColor = "#F97316"} onBlur={e => e.target.style.borderColor = "#E7E5E4"} />
+                  <span style={{ color: "#A8A29E" }}>.</span>
+                  <input type="text" inputMode="numeric" placeholder="YYYY" value={dateParts.year}
+                    onChange={e => updateDatePart("year", e.target.value)} style={{ ...inputStyle, width: 68, textAlign: "center" as const, padding: "12px 4px" }}
+                    onFocus={e => e.target.style.borderColor = "#F97316"} onBlur={e => e.target.style.borderColor = "#E7E5E4"} />
+                  <input type="text" inputMode="numeric" placeholder="HH:MM" value={dateParts.time}
+                    onChange={e => updateDatePart("time", e.target.value)} style={{ ...inputStyle, width: 76, textAlign: "center" as const, padding: "12px 4px", marginLeft: 6 }}
+                    onFocus={e => e.target.style.borderColor = "#F97316"} onBlur={e => e.target.style.borderColor = "#E7E5E4"} />
+                </div>
               </div>
             </div>
           </div>

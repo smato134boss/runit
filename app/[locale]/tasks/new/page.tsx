@@ -36,6 +36,26 @@ export default function NewTaskPage() {
   const isFr = locale === "fr";
 
   const [form, setForm] = useState({ title: "", description: "", category: "", from_city: "", to_city: "", budget: "", deadline: "" });
+  const [dateParts, setDateParts] = useState({ day: "", month: "", year: "", time: "" });
+
+  function updateDatePart(part: "day" | "month" | "year" | "time", raw: string) {
+    let value = raw;
+    if (part === "time") {
+      const digits = raw.replace(/\D/g, "").slice(0, 4);
+      value = digits.length > 2 ? `${digits.slice(0, 2)}:${digits.slice(2)}` : digits;
+    } else {
+      const maxLen = part === "year" ? 4 : 2;
+      value = raw.replace(/\D/g, "").slice(0, maxLen);
+    }
+    const next = { ...dateParts, [part]: value };
+    setDateParts(next);
+    const timeValid = /^\d{2}:\d{2}$/.test(next.time);
+    if (next.day.length === 2 && next.month.length === 2 && next.year.length === 4 && timeValid) {
+      update("deadline", `${next.year}-${next.month}-${next.day}T${next.time}`);
+    } else {
+      update("deadline", "");
+    }
+  }
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -198,8 +218,22 @@ export default function NewTaskPage() {
                 <label style={{ fontSize: 13, color: "#78716C", fontWeight: 500, display: "block", marginBottom: 6 }}>
                   {t.deadline} <span style={{ color: "#A8A29E" }}>{t.optional}</span>
                 </label>
-                <input type="datetime-local" lang="en-CA" value={form.deadline} onChange={e => update("deadline", e.target.value)} style={inputStyle}
-                  onFocus={e => e.target.style.borderColor = "#F97316"} onBlur={e => e.target.style.borderColor = "#E7E5E4"} />
+                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                  <input type="text" inputMode="numeric" placeholder="DD" value={dateParts.day}
+                    onChange={e => updateDatePart("day", e.target.value)} style={{ ...inputStyle, width: 52, textAlign: "center" as const, padding: "12px 4px" }}
+                    onFocus={e => e.target.style.borderColor = "#F97316"} onBlur={e => e.target.style.borderColor = "#E7E5E4"} />
+                  <span style={{ color: "#A8A29E" }}>.</span>
+                  <input type="text" inputMode="numeric" placeholder="MM" value={dateParts.month}
+                    onChange={e => updateDatePart("month", e.target.value)} style={{ ...inputStyle, width: 52, textAlign: "center" as const, padding: "12px 4px" }}
+                    onFocus={e => e.target.style.borderColor = "#F97316"} onBlur={e => e.target.style.borderColor = "#E7E5E4"} />
+                  <span style={{ color: "#A8A29E" }}>.</span>
+                  <input type="text" inputMode="numeric" placeholder="YYYY" value={dateParts.year}
+                    onChange={e => updateDatePart("year", e.target.value)} style={{ ...inputStyle, width: 68, textAlign: "center" as const, padding: "12px 4px" }}
+                    onFocus={e => e.target.style.borderColor = "#F97316"} onBlur={e => e.target.style.borderColor = "#E7E5E4"} />
+                  <input type="text" inputMode="numeric" placeholder="HH:MM" value={dateParts.time}
+                    onChange={e => updateDatePart("time", e.target.value)} style={{ ...inputStyle, width: 76, textAlign: "center" as const, padding: "12px 4px", marginLeft: 6 }}
+                    onFocus={e => e.target.style.borderColor = "#F97316"} onBlur={e => e.target.style.borderColor = "#E7E5E4"} />
+                </div>
               </div>
             </div>
           </div>
